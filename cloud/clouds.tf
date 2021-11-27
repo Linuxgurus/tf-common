@@ -1,6 +1,6 @@
 locals {
-  cloud {
-    black {
+  cloud = {
+    black =  {
       name        = "black"
 
       naming      = {
