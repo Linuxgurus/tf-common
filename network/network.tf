@@ -1,5 +1,5 @@
 resource "aws_vpc"  "vpc" {
-  cidr_block = module.cloud.info.cidr_block
-  tags = module.naming.tags
+  cidr_block = module.common.info.cidr_block
+  tags = module.common.tags
 }
 
