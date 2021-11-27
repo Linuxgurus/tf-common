@@ -1,4 +1,4 @@
 locals {
-  tags = merge(var.locale, { Name    = var.name}, var.extra_tags )
+  tags = merge(var.naming, { Name    = var.name}, var.extra_tags )
 }
 
