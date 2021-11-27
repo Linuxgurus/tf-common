@@ -1,4 +1,10 @@
 output black {
+  locale      = {
+    stage     = "prod"
+    env       = "black"
+  }
+
+  name        = "black"
   vpc_id      = "unknown"
   aws_profile = "gbpn"
   cidr        = "10.30.0.0/16"
