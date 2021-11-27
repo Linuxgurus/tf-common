@@ -1,12 +1,10 @@
-output "vpc"      { value = "default"               }
-output "cidr"     { value = "10.30.0/0/16"          }
-output "tld"      { value = "black.gbpn.com"        }
-
-output "sg"       { value = "black-base"            }
-
-output "tags"     {
-  value = tomap({
-    stage   = "prod"
-    env     = "black"
-  })
+output black {
+  vpc_id      = "unknown"
+  aws_profile = "gbpn"
+  cidr        = "10.30.0.0/16"
+  tld         = "black.gbpn.com"  
+  region      = "us-west-2"
+  base_sg     = "black-base"
+  base_iam    = "unknown"
 }
+
