@@ -8,7 +8,7 @@ resource "aws_security_group"  "admin" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-  tags = merge({ Name: "${var.cloud}-admin"}, module.common.tags)
+  tags = merge(module.common.tags, { Name: "${var.cloud}-admin"})
 
 }
 
@@ -22,7 +22,7 @@ resource "aws_security_group"  "base" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-  tags = merge(module.common.tags, { Name: "${var.cloud}-admin"})
+  tags = merge(module.common.tags, { Name: "${var.cloud}-base"})
 
 }
 
