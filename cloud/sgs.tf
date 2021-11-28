@@ -30,7 +30,7 @@ resource aws_security_group_rule  "admin_ssh" {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  security_group = aws_security_group.base.id
+  security_group_id = aws_security_group.base.id
   source_security_group_id = aws_security_group.admin.id
 }
 
