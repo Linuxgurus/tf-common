@@ -6,7 +6,13 @@ resource aws_iam_policy "base" {
   tags = module.common.tags
   policy = jsonencode({
     Version = "2012-10-17"
-    Statement = []
+    Statement = [
+      Action = [
+        "s3:ListBucket"
+      ]
+      Effect = "Allow"
+      Resource = "*"
+    ]
   })
 
 }
