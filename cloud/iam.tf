@@ -1,17 +1,12 @@
 
-resource aws_iam_role "base" {
+resource aws_iam_policy "base" {
   name = "${var.cloud}-base"
   description = "Base System Role for ${var.cloud}"
-    assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = { Service = "ec2.amazonaws.com" }
-      },
-    ]
-  })
+  path = "/"
   tags = module.common.tags
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = []
+  })
+
 }
