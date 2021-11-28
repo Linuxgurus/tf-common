@@ -7,12 +7,14 @@ resource aws_iam_policy "base" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-      Action = [
-        "s3:ListBucket"
+      {
+        Action = [
+          "s3:ListBucket"
+        ]
+        Effect = "Allow"
+        Resource = "*"
       ]
-      Effect = "Allow"
-      Resource = "*"
-    ]
+    }
   })
 
 }
