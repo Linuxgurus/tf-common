@@ -1,5 +1,5 @@
 module "public_subnets"  {
-  source "./public_subnets"
+  source  = "./public_subnets"
   vpc_id = aws_vpc.vpc
 
   cloud = var.cloud
@@ -9,7 +9,7 @@ module "public_subnets"  {
 }
 
 module "private_subnets"  {
-  source "./private_subnets"
+  source = "./private_subnets"
   vpc_id = aws_vpc.vpc
 
   cloud = var.cloud
