@@ -4,7 +4,11 @@ resource "aws_vpc"  "vpc" {
 }
 
 resource "aws_internet_gateway" "igw" {
-  count = var.add_igw ? 1 : 0
+  vpc_id = aws_vpc.vpc.id
   tags = module.naming.tags
 }
 
+resource "aws_nat_gateway" "natgw" {
+  count = var.add_nat ? 1 : 0
+  tags = module.naming.tags
+}
