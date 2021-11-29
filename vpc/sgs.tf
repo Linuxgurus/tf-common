@@ -13,7 +13,7 @@ resource "aws_security_group"  "admin" {
 }
 
 resource "aws_security_group"  "base" {
-  name = local.base_sg_name
+  name = module.naming.env.base_sg
   description = "Base SG for ${var.cloud}"
   egress {
     from_port        = 0
