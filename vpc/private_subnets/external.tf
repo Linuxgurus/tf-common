@@ -1,7 +1,7 @@
 module "naming" {
   source = "../../naming"
   cloud = var.cloud
-  cluster = var.cluster
+  cluster = "private"
   name = var.name
   app = var.app
 }
