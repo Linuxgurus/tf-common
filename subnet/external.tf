@@ -1,6 +1,6 @@
 locals {
   stance = var.public==false ? "private" : "public" 
-  az_short = substsr(var.availability_zone,-2,-1)
+  az_short = substr(var.availability_zone,-2,-1)
   calc_name  = "${var.cloud}-${local.stance}-${local.az_short}"
   name  = coalesce(var.name, local.calc_name)
 }
