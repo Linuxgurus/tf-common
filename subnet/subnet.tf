@@ -1,7 +1,8 @@
 
-resource "aws_subnet" "main" {
+resource "aws_subnet" "subnet" {
   vpc_id     = var.vpc_id
   cidr_block = var.cidr
-  name = module.naming.name
   tags = module.naming.tags
+  availability_zone = var.availability_zone
+  
 }
