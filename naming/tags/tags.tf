@@ -1,7 +1,5 @@
 locals {
-  tags = merge(
-  local.cloud[var.cloud].naming,
-  {
+  tags = {
     Name    = var.name,
     Cluster = var.cluster,
     App     = var.app
