@@ -17,6 +17,7 @@ resource "aws_route" "public" {
 
 module "public_subnets" {
   source = "../subnet"
+  route_table = aws_route.public.id
   for_each = module.naming.env.public_subnets
   cloud = var.cloud
   vpc_id = aws_vpc.vpc.id
@@ -25,8 +26,3 @@ module "public_subnets" {
   public = true
 }
 
-resource "aws_route_table_association" "public_associate" {
-  for_each = module.naming.env.public_subnets
-  route_table_id = aws_route.public.id
-  subnet_id = each.key
-}
