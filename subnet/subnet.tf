@@ -8,7 +8,7 @@ resource "aws_subnet" "subnet" {
 }
 
 resource "aws_route_table_association" "route" {
-  count = var.route_table ? 1 : 0
+  count = length(var.route_table) > 0  ? 1 : 0
   route_table_id = var.route_table
   subnet_id = aws_subnet.subnet.id
 }

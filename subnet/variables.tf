@@ -7,4 +7,4 @@ variable cluster { default="" }
 variable app     { default="" }
 variable public  { default = false } 
 variable name    { default= "" } 
-variable route_table { default=false }
+variable route_table { default="" }
