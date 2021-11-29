@@ -1,18 +1,21 @@
 locals {
-  envs {
+  pre = module.tags.name_pre
+  admin  = "${local.pre}-admin"
+  base  = "${local.pre}-base"
+
+  envs =  {
+    common = {
+      name = var.cloud
+      tld = "${var.cloud}.gbpn.com"
+      base_sg = local.base
+      admin_sg = local.admin
+      base_policy = local.base
+    }
+
     black =  {
-      name        = "black"
-
-      naming      = {
-        stage     = "prod"
-        env       = "black"
-      }
-
+      stage       = "prod"
       aws_profile = "gbpn"
-      tld         = "black.gbpn.com"  
       region      = "us-west-2"
-      base_sg     = "black-base"
-      base_iam    = "unknown"
     }
   }
 }

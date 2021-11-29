@@ -1,5 +1,5 @@
 locals {
-  iam_pre = module.common.name_pre
+  iam_pre = module.naming.name_pre
   policy_name = "${local.iam_pre}-base"
 }
 
