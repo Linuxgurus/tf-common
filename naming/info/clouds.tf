@@ -1,5 +1,9 @@
 locals {
-  pre = module.tags.name_pre
+  pre = join("-", compact([var.cloud, var.cluster, var.app]))
+  name = join("-", compact([local.pre, var.name]))
+  tld_pre = "gpbn-${local.pre}"
+  tld_name = "gbpn-${local.name}"
+
   admin  = "${local.pre}-admin"
   base  = "${local.pre}-base"
 

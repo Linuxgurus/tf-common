@@ -9,5 +9,8 @@ module "tags" {
 module "info" {
   source = "./info"
   cloud = var.cloud
+  cluster = var.cluster
+  app  = var.app
+  name = var.name
 }
 
