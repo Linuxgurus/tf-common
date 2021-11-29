@@ -1,5 +1,5 @@
 
 output "vpc_id" { value = aws_vpc.vpc.id }
 output "igw" { value = aws_internet_gateway.igw }
-output "natgw" { value = var.nat_subnet ? null : aws_internet_gateway.natgw[0] }
+output "natgw" { value = var.nat_subnet ? null : aws_nat_gateway.natgw[0] }
 
