@@ -1,5 +1,5 @@
 module "public_subnets" {
-  source = "git@github.com:gbpn/terraform-common.git//subnet?ref=HEAD"
+  source = "../subnet"
   for_each = module.naming.env.public_subnets
   cloud = var.cloud
   vpc_id = module.network.vpc_id
@@ -9,7 +9,7 @@ module "public_subnets" {
 }
 
 module "private_subnets" {
-  source = "git@github.com:gbpn/terraform-common.git//subnet?ref=HEAD"
+  source = "../subnet"
   for_each = module.naming.env.private_subnets
   cloud = var.cloud
   vpc_id = module.network.vpc_id
