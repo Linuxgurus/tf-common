@@ -4,5 +4,6 @@ resource "aws_subnet" "subnet" {
   cidr_block = var.cidr_block
   tags = module.naming.tags
   availability_zone = var.availability_zone
+  map_public_ip_on_launch = var.public
   
 }
