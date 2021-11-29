@@ -1,6 +1,6 @@
 locals {
   name_pre = join("-", compact([var.cloud, var.cluster, var.app]))
-  name = "${local.name_pre}-${name}"
+  name = "${local.name_pre}-${var.name}"
   tld_pre = "gpbn-${local.name_pre}"
   tld_name = "gbpn-${local.name}"
 }
