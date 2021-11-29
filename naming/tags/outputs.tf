@@ -1,2 +1,2 @@
-output tags  { value = merge(local.stags, var.extra_tags) }
+output tags  { value = merge(local.tags, var.extra_tags) }
 
