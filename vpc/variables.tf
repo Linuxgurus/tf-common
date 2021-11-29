@@ -3,9 +3,6 @@ variable cluster { }
 variable name  { } 
 variable app { default="" }
 
-variable add_nat { default = false }
-
-
-
+variable nat_subnet { default = false }
 
 

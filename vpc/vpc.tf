@@ -3,12 +3,9 @@ resource "aws_vpc"  "vpc" {
   tags = module.naming.tags
 }
 
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.vpc.id
+resource "aws_nat_gateway" "natgw" {
+  count = var.nat_subnet ? 1 : 0
+  subnet_id = var.nat_subnet
   tags = module.naming.tags
 }
 
-resource "aws_nat_gateway" "natgw" {
-  count = var.add_nat ? 1 : 0
-  tags = module.naming.tags
-}
