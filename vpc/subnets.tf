@@ -1,9 +1,19 @@
-module "private_subnets" {
-  source = "../subnet"
-  for_each = module.naming.env.private_subnets
+module "public_subnets"  {
+  source "./public_subnets"
+  vpc_id = aws_vpc.vpc
+
   cloud = var.cloud
-  vpc_id = aws_vpc.vpc.id
-  cidr_block = each.key
-  availability_zone = each.value
+  cluster = var.cluster
+  name = var.name 
+  app = var.app 
 }
 
+module "private_subnets"  {
+  source "./private_subnets"
+  vpc_id = aws_vpc.vpc
+
+  cloud = var.cloud
+  cluster = var.cluster
+  name = var.name 
+  app = var.app 
+}
