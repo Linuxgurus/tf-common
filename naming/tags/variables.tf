@@ -1,6 +1,6 @@
 
 variable cloud      { }
-variable cluster    { } 
+variable cluster    { default = ""} 
 variable app        { default = ""}
 variable name       { }
 
