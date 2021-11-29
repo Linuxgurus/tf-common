@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "bucket" {
   acl    = "private"
   policy = var.policy
   tags = module.naming.tags
-  versioning = { enabled =  var.versioning }
+  versioning { enabled =  var.versioning }
 }
 
 
