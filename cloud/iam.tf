@@ -17,7 +17,7 @@ resource aws_iam_policy "base" {
         Effect   = "Allow"
         Resource = [ 
           module.garbage_bucket.arn,
-          "{module.garbage_bucket.arn}"
+          "${module.garbage_bucket.arn}/*"
         ]
       },
     ]
