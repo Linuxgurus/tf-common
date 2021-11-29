@@ -5,4 +5,3 @@ resource "aws_subnet" "main" {
   name = module.naming.name
   tags = module.naming.tags
 }
-

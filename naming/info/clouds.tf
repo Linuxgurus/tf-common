@@ -21,6 +21,14 @@ locals {
       aws_profile = "gbpn"
       region      = "us-west-2"
       cidr_block  = "10.30.0.0/16"
+      public_subnets = {
+        "10.30.0.0/25" = "us-west-2a"
+        "10.30.2.0/25" = "us-west-2b"
+      }
+      private_subnets = {
+        "10.30.4.0/25" = "us-west-2a"
+        "10.30.6.0/25" = "us-west-2b"
+      }
     }
   }
 }
