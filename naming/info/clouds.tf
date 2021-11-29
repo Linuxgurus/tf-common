@@ -20,6 +20,7 @@ locals {
       stage       = "prod"
       aws_profile = "gbpn"
       region      = "us-west-2"
+      cidr_block  = "10.30.0.0/16"
     }
   }
 }
