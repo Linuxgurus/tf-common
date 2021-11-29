@@ -9,4 +9,4 @@ resource "aws_route" "public" {
   gateway_id = aws_internet_gateway.igw.id
   destination_cidr_block = "0.0.0.0/0"
 }
-/*
+*/
