@@ -3,6 +3,6 @@ module "naming" {
   cloud = var.cloud
   cluster = var.cluster
   app  = var.app
-  name = var.name
+  name = "${var.cloud}-${var.availability_zone}"
 }
 
