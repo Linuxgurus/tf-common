@@ -11,7 +11,7 @@ resource "aws_route_table" "public" {
 resource "aws_route" "public_local" {
   route_table_id = aws_route_table.public.id
   gateway_id = aws_internet_gateway.igw.id
-  destination_cidr_block = aws.naming.env.cidr_block
+  destination_cidr_block = module.naming.env.cidr_block
 }
 
 resource "aws_route" "public" {
