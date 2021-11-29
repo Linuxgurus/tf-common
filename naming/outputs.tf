@@ -10,3 +10,7 @@ output name_pre { value = local.name_pre }
 output tld_pre  { value = local.tld_pre  }
 output tld_name { value = local.tld_name }
 
+output env      { value = module.info.env }
+output tags     { value = module.tags.tags }
+
+

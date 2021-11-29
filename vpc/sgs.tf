@@ -1,12 +1,6 @@
-locals {
-  sg_pre = module.naming.tags.name_pre
-  admin_sg_name  = "${local.sg_pre}-admin"
-  base_sg_name  = "${local.sg_pre}-base"
-}
-
 
 resource "aws_security_group"  "admin" {
-  name = local.admin_sg_name
+  name = module.naming.env.admin_sg
   description = "Admin SG for ${var.cloud}"
   egress {
     from_port        = 0
@@ -15,7 +9,7 @@ resource "aws_security_group"  "admin" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-  tags = merge(module.naming.tags.tags, { Name: local.admin_sg_name })
+  tags = merge(module.naming.tags, { Name: module.naming.env.admin_sg })
 }
 
 resource "aws_security_group"  "base" {
@@ -28,8 +22,7 @@ resource "aws_security_group"  "base" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-  tags = merge(module.naming.tags.tags, { Name: local.base_sg_name })
-
+  tags = merge(module.naming.tags, { Name: module.naming.env.base_sg })
 }
 
 resource aws_security_group_rule  "admin_ssh" {

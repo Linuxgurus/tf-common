@@ -1,4 +1,2 @@
-output "env" {
-  value = merge(local.env['common'], local.env[var.cloud])
-}
+output "env" { value = merge(local.envs['common'], local.envs[var.cloud]) }
 
