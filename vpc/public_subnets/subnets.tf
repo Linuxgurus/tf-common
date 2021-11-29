@@ -1,5 +1,6 @@
 module "subnets" {
   source = "../../subnet"
+  replace_route = true
   route_table = aws_route_table.public.id
   for_each = module.naming.env.public_subnets
   cloud = var.cloud
