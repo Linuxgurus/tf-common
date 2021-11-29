@@ -1,5 +1,12 @@
+locals {
+  sg_pre = module.common.name_pre
+  admin_sg_name  = "${local.sg_pre}-admin"
+  base_sg_name  = "${local.sg_pre}-base"
+}
+
+
 resource "aws_security_group"  "admin" {
-  name = "${var.cloud}-admin"
+  name = local.admin_sg_name
   description = "Admin SG for ${var.cloud}"
   egress {
     from_port        = 0
@@ -8,12 +15,11 @@ resource "aws_security_group"  "admin" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-  tags = merge(module.common.tags, { Name: "${var.cloud}-admin"})
-
+  tags = merge(module.common.tags, { Name: local.admin_sg_name })
 }
 
 resource "aws_security_group"  "base" {
-  name = "${var.cloud}-base"
+  name = local.base_sg_name
   description = "Base SG for ${var.cloud}"
   egress {
     from_port        = 0
@@ -22,7 +28,7 @@ resource "aws_security_group"  "base" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-  tags = merge(module.common.tags, { Name: "${var.cloud}-base"})
+  tags = merge(module.common.tags, { Name: local.base_sg_name })
 
 }
 

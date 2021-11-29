@@ -1,8 +1,8 @@
-module "common" {
+module "naming" {
   source = "git@github.com:gbpn/terraform-common.git//common?ref=HEAD"
   cloud = var.cloud
-  cluster = "core"
-  name = "core"
+  cluster = var.cluster
+  app  = var.app
+  name = var.name
 }
-
 

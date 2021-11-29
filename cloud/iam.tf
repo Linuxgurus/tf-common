@@ -1,6 +1,11 @@
+locals {
+  iam_pre = module.common.name_pre
+  policy_name = "${local.iam_pre}-base"
+}
+
 
 resource aws_iam_policy "base" {
-  name = "${var.cloud}-base"
+  name = local.policy_name
   description = "Base System Role for ${var.cloud}"
   path = "/"
   tags = module.common.tags
