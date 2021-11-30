@@ -17,7 +17,7 @@ resource "aws_cloudtrail" "logs" {
 resource "aws_s3_bucket" "logs" {
   bucket        = local.bucket_name
   force_destroy = true
-  tags = local.naming.tags
+  tags = module.naming.tags
 
   policy = <<POLICY
 {
