@@ -1,6 +1,6 @@
 data "aws_caller_identity" "current" {}
 locals {
-  acct = data.aws_caller_identity.current.account_kd
+  acct = data.aws_caller_identity.current.account_id
   bucket_name = "${module.naming.tld_pre}-logs"
 }
 
