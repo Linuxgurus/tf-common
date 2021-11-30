@@ -8,7 +8,7 @@ resource "aws_cloudtrail" "logs" {
   name                          = local.bucket_name
   s3_bucket_name                = aws_s3_bucket.logs.id
   include_global_service_events = false
-  prefix  = "logs"
+  s3_key_prefix  = ""
 }
 
 resource "aws_s3_bucket" "logs" {
@@ -35,7 +35,7 @@ resource "aws_s3_bucket" "logs" {
           "Service": "cloudtrail.amazonaws.com"
         },
         "Action": "s3:PutObject",
-        "Resource": "arn:aws:s3:::${local.bucket_name}/logs/AWSLogs/${local.account}",
+        "Resource": "arn:aws:s3:::${local.bucket_name}/AWSLogs/${local.account}",
         "Condition": {
           "StringEquals": {
             "s3:x-amz-acl": "bucket-owner-full-control"
