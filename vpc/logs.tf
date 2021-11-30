@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "logs" {
   force_destroy = true
 
   policy = <<POLICY
-  {
+{
     "Version": "2012-10-17",
     "Statement": [
       {
