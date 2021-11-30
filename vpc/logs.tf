@@ -7,6 +7,7 @@ locals {
 resource "aws_cloudtrail" "logs" {
   name                          = local.bucket_name
   s3_bucket_name                = aws_s3_bucket.logs.id
+  tags = module.naming.tags
   event_selector {
     read_write_type           = "WriteOnly"
     include_management_events = true
