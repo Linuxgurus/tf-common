@@ -9,6 +9,9 @@ resource "aws_cloudtrail" "logs" {
   s3_bucket_name                = aws_s3_bucket.logs.id
   include_global_service_events = false
   s3_key_prefix  = ""
+  enable_logging = true
+  is_multi_region_rail = false
+  depends_on = [ aws_s3_bucket.logs ] 
 }
 
 resource "aws_s3_bucket" "logs" {
