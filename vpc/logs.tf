@@ -3,14 +3,7 @@ module  "logs" {
   cloud = var.cloud
   cluster = var.cluster
   name = "logs"
-}
-
-resource "aws_cloudtrail" "logs" {
-  name                          = "${module.naming.pre}-logs"
-  s3_bucket_name                = module.logs.id
-  s3_key_prefix                 = "AWS_LOGS"
-  include_global_service_events = false
-    policy jsonencode({
+  policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -35,5 +28,12 @@ resource "aws_cloudtrail" "logs" {
       }
     ]
   })
+}
+
+resource "aws_cloudtrail" "logs" {
+  name                          = "${module.naming.pre}-logs"
+  s3_bucket_name                = module.logs.id
+  s3_key_prefix                 = "AWS_LOGS"
+  include_global_service_events = false
 }
 
