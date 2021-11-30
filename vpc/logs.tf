@@ -4,18 +4,36 @@ module  "logs" {
   cluster = var.cluster
   name = "logs"
   policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
+    Version= "2012-10-17",
+    Statement= [
       {
-        Sid       = "AWSCloudTrailAclCheck"
-        Action    = "s3:GetBucketAcl"
-        Effect    = "Allow"
-        Principal = { "Service" = "cloudtrail.amazonaws.com" }
-        Resource  = module.garbage_bucket.arn
+        Sid= "AWSCloudTrailAclCheck",
+        Effect= "Allow",
+        Principal= {"Service": "cloudtrail.amazonaws.com"},
+        Action= "s3:GetBucketAcl",
+        Resource= module.logs.id
+      },
+      {
+        Sid= AWSCloudTrailWrite,
+        Effect= Allow,
+        Principal= {Service= "cloudtrail.amazonaws.com"},
+        Action= "s3:PutObject",
+        Resource= "${module.logs.arn}/AWSLogs/*",
+        Condition= {
+          StringEquals= {
+            s3= {
+              x-amz-acl= "bucket-owner-full-control",
+            }
+            aws= {
+              SourceArn= "arn:aws:cloudtrail:region:*:trail/trailName"
+            }
+          }
+        }
       }
     ]
   })
 }
+
 
 resource "aws_cloudtrail" "logs" {
   name                          = "${module.naming.pre}-logs"
@@ -24,30 +42,3 @@ resource "aws_cloudtrail" "logs" {
   include_global_service_events = false
 }
 
-/*
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid       = "AWSCloudTrailAclCheck"
-        Action    = "s3:GetBucketAcl"
-        Effect    = "Allow"
-        Principal = { "Service" = "cloudtrail.amazonaws.com" }
-        Resource  = module.garbage_bucket.arn
-      },
-      {
-        Sid       = "AWSCloudTrailWrite"
-        Action    = "s3:PutObject"
-        Effect    = "Allow"
-        Principal = { "Service" = "cloudtrail.amazonaws.com" }
-        Resource  = "${module.garbage_bucket.arn}/AWS_LOGS/*"
-        Condition = {
-          StringEquals = {
-            "s3:x-amz-acl" = "bucket-owner-full-control"
-          }
-        }
-
-      }
-    ]
-  })
-*/
