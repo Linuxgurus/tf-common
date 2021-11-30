@@ -7,9 +7,11 @@ locals {
 resource "aws_cloudtrail" "logs" {
   name                          = local.bucket_name
   s3_bucket_name                = aws_s3_bucket.logs.id
-  include_global_service_events = false
+  event_selector {
+    read_write_type           = "WriteOnly"
+    include_management_events = true
+  }
   s3_key_prefix  = ""
-  enable_logging = true
   is_multi_region_trail = false
   depends_on = [ aws_s3_bucket.logs ] 
 }
@@ -20,7 +22,7 @@ resource "aws_s3_bucket" "logs" {
   tags = module.naming.tags
 
   policy = <<POLICY
-{
+  {
     "Version": "2012-10-17",
     "Statement": [
       {
