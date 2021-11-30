@@ -1,3 +1,6 @@
+data "aws_caller_identity" "current" {}
+
+
 module  "logs" {
   source = "../s3_bucket"
   cloud = var.cloud
@@ -11,22 +14,16 @@ module  "logs" {
         Effect= "Allow",
         Principal= {"Service": "cloudtrail.amazonaws.com"},
         Action= "s3:GetBucketAcl",
-        Resource= module.logs.id
+        Resource= "arn:aws:s3:::*"
       },
       {
         Sid= AWSCloudTrailWrite,
         Effect= Allow,
         Principal= {Service= "cloudtrail.amazonaws.com"},
         Action= "s3:PutObject",
-        Resource= "${module.logs.arn}/AWSLogs/*",
+        Resource= "*/AWSLogs/*",
         Condition= {
-          StringEquals= {
-            s3= {
-              x-amz-acl= "bucket-owner-full-control",
-            }
-            aws= {
-              SourceArn= "arn:aws:cloudtrail:region:*:trail/trailName"
-            }
+          StringEquals= { "s3:x-amz-acl" = "bucket-owner-full-control" }
           }
         }
       }
