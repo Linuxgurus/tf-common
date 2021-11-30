@@ -6,7 +6,7 @@ locals {
 
 resource "aws_cloudtrail" "logs" {
   name                          = "tf-trail-foobar"
-  s3_bucket_name                = aws_s3_bucket.foo.id
+  s3_bucket_name                = aws_s3_bucket.logs.id
   include_global_service_events = false
 }
 
