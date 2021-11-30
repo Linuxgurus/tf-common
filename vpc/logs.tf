@@ -34,7 +34,7 @@ resource "aws_s3_bucket" "logs" {
           "Service": "cloudtrail.amazonaws.com"
         },
         "Action": "s3:PutObject",
-        "Resource": "arn:aws:s3:::${local.bucket_name}/AWSLogs/${local.account}"
+        "Resource": "arn:aws:s3:::${local.bucket_name}/AWSLogs/${local.account}",
         "Condition": {
           "StringEquals": {
             "s3:x-amz-acl": "bucket-owner-full-control"
