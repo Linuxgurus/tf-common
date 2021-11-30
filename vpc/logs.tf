@@ -10,7 +10,7 @@ resource "aws_cloudtrail" "logs" {
   s3_bucket_name                = module.logs.id
   s3_key_prefix                 = "AWS_LOGS"
   include_global_service_events = false
-    policy = jsonencode({
+    policy jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
