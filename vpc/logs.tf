@@ -1,41 +1,49 @@
 data "aws_caller_identity" "current" {}
+locals {
+  acct = data.aws_caller_identity.current.account_kd
+  bucket_name = "${module.naming.tld_pre}-logs"
+}
 
+resource "aws_cloudtrail" "logs" {
+  name                          = "tf-trail-foobar"
+  s3_bucket_name                = aws_s3_bucket.foo.id
+  include_global_service_events = false
+}
 
-module  "logs" {
-  source = "../s3_bucket"
-  cloud = var.cloud
-  cluster = var.cluster
-  name = "logs"
-  policy = jsonencode({
-    Version= "2012-10-17",
-    Statement= [
+resource "aws_s3_bucket" "logs" {
+  bucket        = local.bucket_name
+  force_destroy = true
+
+  policy = <<POLICY
+  {
+    "Version": "2012-10-17",
+    "Statement": [
       {
-        Sid= "AWSCloudTrailAclCheck",
-        Effect= "Allow",
-        Principal= {"Service": "cloudtrail.amazonaws.com"},
-        Action= "s3:GetBucketAcl",
-        Resource= "arn:aws:s3:::*"
+        "Sid": "AWSCloudTrailAclCheck",
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "cloudtrail.amazonaws.com"
+        },
+        "Action": "s3:GetBucketAcl",
+        "Resource": "arn:aws:s3:::${local.bucket_name}"
       },
       {
-        Sid= AWSCloudTrailWrite,
-        Effect= Allow,
-        Principal= {Service= "cloudtrail.amazonaws.com"},
-        Action= "s3:PutObject",
-        Resource= "*/AWSLogs/*",
-        Condition= {
-          StringEquals= { "s3:x-amz-acl" = "bucket-owner-full-control" }
+        "Sid": "AWSCloudTrailWrite",
+        "Effect": "Allow",
+        "Principal": {
+          "Service": "cloudtrail.amazonaws.com"
+        },
+        "Action": "s3:PutObject",
+        "Resource": "arn:aws:s3:::${local.bucket_name}/AWSLogs/${local.account}"
+        "Condition": {
+          "StringEquals": {
+            "s3:x-amz-acl": "bucket-owner-full-control"
           }
         }
       }
     ]
-  })
+  }
+  POLICY
 }
 
-
-resource "aws_cloudtrail" "logs" {
-  name                          = "${module.naming.pre}-logs"
-  s3_bucket_name                = module.logs.id
-  s3_key_prefix                 = "AWS_LOGS"
-  include_global_service_events = false
-}
 
